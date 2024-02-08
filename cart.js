@@ -1,5 +1,5 @@
 import { createApp } from "https://unpkg.com/vue@3/dist/vue.esm-browser.js";
-//使用預設匯入，自己取名字
+//modal子元件
 import userProductModal from "./productModal.js";
 import deleteModal from "./deleteModal.js";
 
@@ -18,7 +18,7 @@ VeeValidate.configure({
   validateOnInput: true, // 調整為：輸入文字時，就立即進行驗證
 });
 
-const app = createApp({
+const app = Vue.createApp({
   data() {
     return {
       products: [], //全部商品
@@ -155,16 +155,15 @@ const app = createApp({
       }
     },
     onSubmit() {
-      console.log("點擊送出", this);
-      console.log("form", this.form);
       const data = this.form;
-      console.log("data", data);
+
       axios
         .post("https://ec-course-api.hexschool.io/v2/api/cd131423/order", {
           data: data,
         })
         .then((res) => {
           console.log(res);
+          this.$refs.form.resetForm();
           this.getOrder();
         })
         .catch((err) => {
@@ -177,6 +176,7 @@ const app = createApp({
     this.getOrder();
   },
 });
+
 // 步驟 2：註冊元件
 app.component("VForm", VeeValidate.Form);
 app.component("VField", VeeValidate.Field);
