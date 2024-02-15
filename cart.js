@@ -98,6 +98,7 @@ const app = Vue.createApp({
         .get("https://ec-course-api.hexschool.io/v2/api/cd131423/cart")
         .then((res) => {
           this.cartOrder = res.data.data; //將值賦值給購物清單
+          console.log("購物清單", this.cartOrder);
         })
         .catch((err) => {
           console.log(err);
@@ -166,10 +167,7 @@ const app = Vue.createApp({
           console.log(err);
         });
     },
-    // isPhone(value) {
-    //   const phoneNumber = /(^09|\+?8869)\d{2}(-?\d{3}-?\d{3})$/;
-    //   return phoneNumber.test(value) ? true : "需要正確的電話號碼";
-    // },
+
     isPhone() {
       const phoneNumber = /^(09\d{8})$/;
       return phoneNumber.test(this.form.user.tel) || "請填寫正確的電話號碼";

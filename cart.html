@@ -113,6 +113,7 @@
           <div class="text-end">
             <button
               class="btn btn-outline-danger"
+              :disabled="!cartOrder.total"
               @click="openModal('deleteAll')"
               type="button"
             >
@@ -291,7 +292,13 @@
               ></textarea>
             </div>
             <div class="text-end">
-              <button type="submit" class="btn btn-danger">送出訂單</button>
+              <button
+                type="submit"
+                class="btn btn-danger"
+                :disabled="!cartOrder.total"
+              >
+                送出訂單
+              </button>
             </div>
           </v-form>
         </div>
